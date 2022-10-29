@@ -1,0 +1,78 @@
+﻿@model IEnumerable<handi_crafts.Models.Category>
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+ @{
+ ViewBag.Admin= ViewBag.AdminInfo;
+ }  
+ 
+
+	<div class="app-wrapper">
+
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-xl">
+
+				<div class="row g-3 mb-4 align-items-center justify-content-between">
+					<div class="col-auto">
+						<h1 class="app-page-title mb-0">Categories</h1>
+					</div>
+
+
+				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+						<div class="app-card app-card-orders-table shadow-sm mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+								<table class="table app-table-hover mb-0 text-left">
+									<thead>
+										<tr>
+																						<th>
+
+
+
+				<a class="btn btn-success btn-sm" asp-action="AddCategory" asp-controller="Admin">Add Category</a>
+
+
+			</th>
+										</tr>
+										<tr>
+
+
+											<th>
+												@Html.DisplayNameFor(model => model.CategoryName)
+											</th>
+								
+											<th>
+												@Html.DisplayNameFor(model => model.ImageFile)
+											</th>
+			
+
+										</tr>
+										</thead>
+										<tbody>
+										
+										@foreach (var item in Model)
+										{
+											<tr>
+												<td>
+													@Html.DisplayFor(modelItem => item.CategoryName)
+												</td>
+
+												<td>
+													<img src=@Url.Content("~/Images/" + item.ImagePath) asp-append-version="true" style="border-radius:50%;" width="100" height="100" />
+
+												</td>
+											
+												<td>
+													<a asp-action="EditCategory" asp-route-id="@item.Id">Edit</a> 
+													<a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+													<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+												</td>
+											</tr>
+										}
+										</tbody>
+									</table>
+								</div><!--//table-responsive-->
+
+

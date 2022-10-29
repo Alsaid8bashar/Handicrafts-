@@ -1,0 +1,184 @@
+﻿@{
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+@{
+	ViewBag.Admin = ViewBag.AdminInfo;
+}
+@model IEnumerable<handi_crafts.Models.CartProduct>
+
+<link href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css" rel="stylesheet" />
+<div class="app-wrapper">
+
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+
+			<div class="row g-3 mb-4 align-items-center justify-content-between">
+				<div class="col-auto">
+					<h1 class="app-page-title mb-0">Orders</h1>
+				</div>
+				<br />
+				<br />
+				<br />
+
+
+				<div class="col-auto">
+					<div class="page-utilities">
+						<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							<div class="col-auto">
+							</div><!--//col-->
+
+							<div class="col-auto">
+								<a class="btn app-btn-secondary" href="#">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+										<path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+									</svg>
+									Download CSV
+								</a>
+							</div>
+						</div><!--//row-->
+					</div><!--//table-utilities-->
+				</div><!--//col-auto-->
+			</div><!--//row-->
+
+
+
+
+			<div class="tab-content" id="orders-table-tab-content">
+				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					<div class="app-card app-card-orders-table shadow-sm mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+								<form method="post" asp-action="AnnualReports">
+									<select name="Year" class="form-select" aria-label="Default select example">
+										<option selected value=''>--Select Year--</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<div class="col-auto">
+										</div>
+									</select>
+									<div class="col-auto">
+										<button type="submit" class="btn app-btn-secondary">Search</button>
+									</div>
+								</form>
+
+								<table class="table app-table-hover mb-0 text-left" id="example">
+									<thead>
+										<tr>
+											<th>
+												@Html.DisplayNameFor(model => model.Product.Name)
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Quantity)
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Cart.DatePurchase)
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Product.Price)
+											</th>
+
+
+
+
+
+										</tr>
+									</thead>
+									<tbody>
+
+
+										@foreach (var item in Model)
+										{
+
+											<tr>
+
+
+
+												<td>
+													@Html.DisplayFor(modelItem => item.Product.Name)
+												</td>
+												<td>
+													@Html.DisplayFor(modelItem => item.Quantity)
+												</td>
+												<td>
+													@Html.DisplayFor(modelItem => item.Cart.DatePurchase)
+												</td>
+												<td>
+													@Html.DisplayFor(modelItem => item.Product.Price)
+												</td>
+											</tr>
+										}
+
+
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+
+				</div><!--//tab-pane-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div><!--//tab-content-->
+
+
+
+		</div><!--//container-fluid-->
+	</div><!--//app-content-->
+
+
+
+</div><!--//app-wrapper-->
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js" defer></script>
+
+<script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js" defer></script>
+<script>
+	$(document).ready(function() {
+		$('#example').DataTable({
+			dom: 'Bfrtip',
+			buttons: [
+				'copyHtml5',
+				'excelHtml5',
+				'csvHtml5',
+				'pdfHtml5'
+			]
+		});
+	});
+</script>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<handi_crafts.Models.CartProduct>
+@{
+	ViewData["Title"] = "Crafts";
+	Layout = "~/Views/Shared/_VendorLayout.cshtml";
+}
+
+@{
+	ViewBag.Vendor = ViewBag.VendorInfo;
+}
+
+
+
+
+
+
+
+	<div class="app-wrapper">
+
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-xl">
+
+				<div class="row g-3 mb-4 align-items-center justify-content-between">
+					<div class="col-auto">
+						<h1 class="app-page-title mb-0">Your Crafts</h1>
+					</div>
+
+
+				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+						<div class="app-card app-card-orders-table shadow-sm mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+								<table class="table app-table-hover mb-0 text-left">
+									<thead>
+										<tr>
+																						<th>
+
+
+
+				<a class="btn btn-success btn-sm" asp-action="AddCrafts" asp-controller="Vendor">Add crafts</a>
+
+
+			</th>
+										</tr>
+										<tr>
+
+
+											<th>
+												@Html.DisplayNameFor(model => model.Product.Name)
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Product.Price)
+											</th>
+
+											<th>
+												@Html.DisplayNameFor(model => model.Product.Quantity)
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Product.Descriptionn)
+											</th>
+												<th>
+												@Html.DisplayNameFor(model => model.Product.Category.CategoryName)
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Product.ImageFile)
+											</th>
+			
+
+										</tr>
+										</thead>
+										<tbody>
+											@{
+												     List<Category> categories = ViewBag.category;
+											}
+										@foreach (var item in Model)
+										{
+											<tr>
+												<td>
+													@Html.DisplayFor(modelItem => item.Product.Name)
+												</td>
+
+												<td>
+													@Html.DisplayFor(modelItem => item.Product.Price)
+												</td>
+												<td>
+													@Html.DisplayFor(modelItem => item.Product.Quantity)
+												</td>
+												<td>
+													@Html.DisplayFor(modelItem => item.Product.Descriptionn)
+												</td>
+												<td>
+										
+													@categories.Find(x=>x.Id==item.Product.CategoryId).CategoryName
+									
+												        
+									</td>
+
+												<td>
+													<img src=@Url.Content("~/Images/" + item.Product.Imagepath) asp-append-version="true" style="border-radius:50%;" width="100" height="100" />
+
+												</td>
+											
+												<td>
+													<a asp-action="EditCrafts" asp-route-id="@item.Product.Id">Edit</a> 
+													<a asp-action="Details" asp-route-id="@item.Product.Id">Details</a> 
+													<a asp-action="Delete" asp-route-id="@item.Product.Id">Delete</a>
+												</td>
+											</tr>
+										}
+										</tbody>
+									</table>
+								</div><!--//table-responsive-->
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

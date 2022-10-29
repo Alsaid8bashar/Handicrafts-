@@ -1,0 +1,76 @@
+﻿@model Userr
+
+@{
+	ViewData["Title"] = "UpdateProfile";
+	Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@{
+	ViewBag.cart = ViewBag.usercart;
+}
+
+
+
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Dashboard</h1>
+					<ol class="breadcrumb">
+						<li><a asp-action="Index">Home</a></li>
+						<li class="active">my account</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li><a asp-action="Profile">Dashboard</a></li>
+					<li><a asp-action="Orders">Orders</a></li>
+					<li><a asp-action="Address">Address</a></li>
+					<li><a asp-action="UpdateProfile" class="active">Profile Details</a></li>
+				</ul>
+				<form class="text-left clearfix" method="post" asp-action="UpdateProfile" enctype="multipart/form-data" >
+					<div class="dashboard-wrapper dashboard-user-profile">
+
+						<div class="media">
+							<div class="pull-left text-center" href="#!">
+								<img class="media-object user-img" src="@Url.Content("~/Images/" + Model.ImagePath)" alt="Image" style="border-radius:0%">
+								<input class="form-control" type="file"asp-for="ImageFile">
+							</div>
+
+							<div class="form-group">
+								<input type="text" class="form-control" asp-for="FirstName"   required>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" asp-for="LastName"  required>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="username" value="@ViewBag.UserData.UserrName" required>
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" name="email" value="@ViewBag.UserData.Email"  required>
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" name="password" value="@ViewBag.UserData.Passwordd"  required>
+							</div>
+
+
+
+						
+							<div class="text-center">
+								<button type="submit"  class="btn btn-main text-center">Save change</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

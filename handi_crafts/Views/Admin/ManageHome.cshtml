@@ -1,0 +1,139 @@
+﻿@model handi_crafts.Models.Image
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@{
+	List<Image> images = ViewBag.HomePageImages;
+}
+	<a asp-action="Index" class="btn btn-main mt-20"> Back to overview</a>
+<div class="hero-slider">
+	
+  <div class="slider-item th-fullpage hero-area" style="background-image: url(@Url.Content("~/Images/" + images.ElementAt(0).ImagePath));">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 text-center">
+          <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
+          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" data-toggle="modal" data-target="#coupon-modal">Change slider 1 image</a>
+		  	
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-item th-fullpage hero-area" style="background-image: url(@Url.Content("~/Images/" + images.ElementAt(1).ImagePath));">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 text-left">
+          <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
+          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" data-toggle="modal" data-target="#coupon-modal2">Change slider 2 image</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-item th-fullpage hero-area" style="background-image: url(@Url.Content("~/Images/" + images.ElementAt(2).ImagePath));">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 text-right">
+          <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
+          <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" data-toggle="modal" data-target="#coupon-modal3">Change slider 3 image</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--
+Start Call To Action
+==================================== -->
+<section class="call-to-action bg-gray section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="title">
+					<h2>SUBSCRIBE TO NEWSLETTER</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut sequi. Minus facilis vitae excepturi sit laboriosam.</p>
+				</div>
+				<div class="col-lg-6 col-md-offset-3">
+				    <div class="input-group subscription-form">
+				      <input type="text" class="form-control" placeholder="Enter Your Email Address">
+				      <span class="input-group-btn">
+				        <button class="btn btn-main" type="button">Subscribe Now!</button>
+				      </span>
+				    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+
+			</div>
+		</div> 		<!-- End row -->
+	</div>   	<!-- End container -->
+</section>   <!-- End section -->
+
+<section class="section instagram-feed">
+	<div class="container">
+		<div class="row">
+			<div class="title">
+				<h2>View us on instagram</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="instagram-slider" id="instafeed" data-accessToken="IGQVJYeUk4YWNIY1h4OWZANeS1wRHZARdjJ5QmdueXN2RFR6NF9iYUtfcGp1NmpxZA3RTbnU1MXpDNVBHTzZAMOFlxcGlkVHBKdjhqSnUybERhNWdQSE5hVmtXT013MEhOQVJJRGJBRURn"></div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="modal fade" id="coupon-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form asp-action="ManageHome" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							
+							  <input asp-for="ImageFile" class="form-control" />
+						</div>
+						<button type="submit"  type="submit" asp-route-id="7" class="btn btn-main">Save change</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+				@*_+______________________________________*@
+				<div class="modal fade" id="coupon-modal2" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form asp-action="ManageHome" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+									  <input asp-for="ImageFile" class="form-control" />
+						</div>
+						<button type="submit" asp-route-id="5" class="btn btn-main">Save change</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+								@*_+______________________________________*@
+				<div class="modal fade" id="coupon-modal3" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form asp-action="ManageHome" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+								  <input asp-for="ImageFile" class="form-control" />
+						</div>
+						<button type="submit" asp-route-id="6" class="btn btn-main">Save change</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

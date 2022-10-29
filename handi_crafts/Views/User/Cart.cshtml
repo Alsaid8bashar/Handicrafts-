@@ -1,0 +1,74 @@
+﻿@model IEnumerable<handi_crafts.Models.CartProduct>
+
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{
+	ViewBag.cart=ViewBag.usercart;
+}
+
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Cart</h1>
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li class="active">cart</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<div class="page-wrapper">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="">Item Name</th>
+                      <th class="">Item Price</th>
+                      <th class="">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      @foreach(var item in Model){
+                               <tr class="">
+                      <td class="">
+                        <div class="product-info">
+                          <img width="80" src="@Url.Content("~/Images/" + item.Product.Imagepath)" alt="" />
+                          <a href="#!">@item.Product.Name</a>
+                        </div>
+                      </td>
+                      <td class="">$@item.Product.Price</td>
+                      <td class="">
+                        <a class="product-remove" href="#!">Remove</a>
+                      </td>
+                    </tr>
+                    }
+           
+     
+                  </tbody>
+                </table>
+                <a  asp-action="Checkout" class="btn btn-main pull-right">Checkout</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<handi_crafts.Models.CartProduct>
+
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@{
+	ViewBag.cart = ViewBag.usercart;
+}
+
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Dashboard</h1>
+					<ol class="breadcrumb">
+						<li><a asp-action="Index">Home</a></li>
+						<li class="active">my account</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li><a asp-action="Profile">Dashboard</a></li>
+					<li><a asp-action="Orders" class="active">Orders</a></li>
+					<li><a asp-action="Address">Address</a></li>
+					<li><a  asp-action="UpdateProfile" asp-route-id=@ViewBag.userid>Profile Details</a></li>
+				</ul>
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Order ID</th>
+									<th>Date</th>
+									<th>Items</th>
+									<th>Total Price</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+							
+								@foreach(var item in Model){
+								<tr>
+									<td>#@item.Cart.Idd</td>
+									<td>@item.Cart.DatePurchase</td>
+									<td>@item.Cart.CartProducts.Count()</td>
+									<td>$@item.Cart.CartProducts.Sum(x=> x.Product.Price) </td>
+										@if (@item.Cart.Purchasestate == 1)
+										{
+											<td><span class="label label-success">Completed</span></td>
+										}
+										else
+										{
+											<td><span class="label label-warning">Pending</span></td>
+										}
+
+									<td><a href="order.html" class="btn btn-default">View</a></td>
+								</tr>
+								
+								}
+						
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
