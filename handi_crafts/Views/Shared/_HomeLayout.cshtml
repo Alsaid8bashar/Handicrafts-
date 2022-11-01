@@ -86,41 +86,7 @@
 						<a href="~/home/#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
 								class="tf-ion-android-cart"></i>Cart</a>
 						<div class="dropdown-menu cart-dropdown">
-							<!-- Cart Item -->
-							<div class="media">
-								<a class="pull-left" href="~/home/#!">
-									<img class="media-object" src="~/home/images/shop/cart/cart-1.jpg" alt="image" />
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading"><a href="~/home/#!">Ladies Bag</a></h4>
-									<div class="cart-price">
-										<span>1 x</span>
-										<span>1250.00</span>
-									</div>
-									<h5><strong>$1200</strong></h5>
-								</div>
-								<a href="~/home/#!" class="remove"><i class="tf-ion-close"></i></a>
-							</div><!-- / Cart Item -->
-							<!-- Cart Item -->
-							<div class="media">
-								<a class="pull-left" href="~/home/#!">
-									<img class="media-object" src="~/home/images/shop/cart/cart-2.jpg" alt="image" />
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading"><a href="~/home/#!">Ladies Bag</a></h4>
-									<div class="cart-price">
-										<span>1 x</span>
-										<span>1250.00</span>
-									</div>
-									<h5><strong>$1200</strong></h5>
-								</div>
-								<a href="~/home/#!" class="remove"><i class="tf-ion-close"></i></a>
-							</div><!-- / Cart Item -->
-
-							<div class="cart-summary">
-								<span>Total</span>
-								<span class="total-price">$1799.00</span>
-							</div>
+						
 							<ul class="text-center cart-buttons">
 								<li><a href="~/home/cart.html" class="btn btn-small">View Cart</a></li>
 								<li><a href="~/home/checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
@@ -135,7 +101,7 @@
 								class="tf-ion-ios-search-strong"></i> Search</a>
 						<ul class="dropdown-menu search-dropdown">
 							<li>
-								<form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
+								<form  asp-action="Search" ><input type="search" name="catgeoryName" class="form-control" placeholder="Search..."></form>
 							</li>
 						</ul>
 					</li><!-- / Search -->
@@ -179,47 +145,13 @@
 
 					<!-- Home -->
 					<li class="dropdown ">
-						<a href="~/home/index.html">Home</a>
+						<a asp-action="Index" asp-controller="Home">Home</a>
+					</li><!-- / Home -->
+						<li class="dropdown ">
+						<a asp-action="Shop" asp-route-id=@null asp-controller="Home" >Shop</a>
 					</li><!-- / Home -->
 
-
-					<!-- Elements -->
-					<li class="dropdown dropdown-slide">
-						<a href="~/home/#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Shop <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<div class="dropdown-menu">
-							<div class="row">
-
-								<!-- Basic -->
-								<div class="col-lg-6 col-md-6 mb-sm-3">
-									<ul>
-										<li class="dropdown-header">Pages</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="~/home/shop.html">Shop</a></li>
-										<li><a href="~/home/checkout.html">Checkout</a></li>
-										<li><a href="~/home/cart.html">Cart</a></li>
-										<li><a href="~/home/pricing.html">Pricing</a></li>
-										<li><a href="~/home/confirmation.html">Confirmation</a></li>
-
-									</ul>
-								</div>
-
-								<!-- Layout -->
-								<div class="col-lg-6 col-md-6 mb-sm-3">
-									<ul>
-										<li class="dropdown-header">Layout</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="~/home/product-single.html">Product Details</a></li>
-										<li><a href="~/home/shop-sidebar.html">Shop With Sidebar</a></li>
-
-									</ul>
-								</div>
-
-							</div><!-- / .row -->
-						</div><!-- / .dropdown-menu -->
-					</li><!-- / Elements -->
-
+					
 
 					<!-- Pages -->
 					<li class="dropdown full-width dropdown-slide">
@@ -234,11 +166,9 @@
 									<ul>
 										<li class="dropdown-header">Introduction</li>
 										<li role="separator" class="divider"></li>
-										<li><a href="~/home/contact.html">Contact Us</a></li>
-										<li><a href="~/home/about.html">About Us</a></li>
-										<li><a href="~/home/404.html">404 Page</a></li>
-										<li><a href="~/home/coming-soon.html">Coming Soon</a></li>
-										<li><a href="~/home/faq.html">FAQ</a></li>
+									<li><a asp-action="ContactUs" asp-controller="Home">Contact Us</a></li>
+									
+										<li><a  asp-controller="Home" asp-action="home">About Us</a></li>
 									</ul>
 								</div>
 
@@ -260,8 +190,7 @@
 										<li class="dropdown-header">Utility</li>
 										<li role="separator" class="divider"></li>
 										<li><a asp-action="Login" asp-controller="LoginandRegistration">Login Page</a></li>
-										<li><a href="~/home/signin.html">Signin Page</a></li>
-										<li><a href="~/home/forget-password.html">Forget Password</a></li>
+										<li><a asp-action="Register" asp-controller="LoginandRegistration">Signin Page</a></li>
 									</ul>
 								</div>
 
@@ -277,33 +206,8 @@
 
 
 
-					<!-- Blog -->
-					<li class="dropdown dropdown-slide">
-						<a href="~/home/#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Blog <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="~/home/blog-left-sidebar.html">Blog Left Sidebar</a></li>
-							<li><a href="~/home/blog-right-sidebar.html">Blog Right Sidebar</a></li>
-							<li><a href="~/home/blog-full-width.html">Blog Full Width</a></li>
-							<li><a href="~/home/blog-grid.html">Blog 2 Columns</a></li>
-							<li><a href="~/home/blog-single.html">Blog Single</a></li>
-						</ul>
-					</li><!-- / Blog -->
-
-					<!-- Shop -->
-					<li class="dropdown dropdown-slide">
-						<a href="~/home/#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Elements <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="~/home/typography.html">Typography</a></li>
-							<li><a href="~/home/buttons.html">Buttons</a></li>
-							<li><a href="~/home/alerts.html">Alerts</a></li>
-						</ul>
-					</li><!-- / Blog -->
-				</ul><!-- / .nav .navbar-nav -->
-
+			
+			
 			</div>
 			<!--/.navbar-collapse -->
 		</div><!-- / .container -->
@@ -382,7 +286,7 @@
 						<a href="~/home/contact.html">PRIVACY POLICY</a>
 					</li>
 				</ul>
-				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="~/home/https://themefisher.com/">Themefisher</a></p>
+				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://github.com/Alsaid8bashar">Bashar8Alsaid</a></p>
 			</div>
 		</div>
 	</div>

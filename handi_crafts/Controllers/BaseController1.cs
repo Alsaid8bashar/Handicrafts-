@@ -21,7 +21,7 @@ namespace handi_crafts.Controllers
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-                {
+                
                 //User ID
 
                 var userId = HttpContext.Session.GetInt32("UserId");
@@ -30,7 +30,7 @@ namespace handi_crafts.Controllers
                 var userCart = _context.CartProducts.Include(p => p.Product).Where(x => x.CartId == Cart.Idd).Where(x => x.Cart.Purchasestate == 0).ToList();
                 ViewBag.usercart = userCart;
            
-                }
+                
 
 
             }

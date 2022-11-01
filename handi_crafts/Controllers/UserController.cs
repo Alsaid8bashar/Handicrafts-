@@ -1,4 +1,4 @@
-﻿using handi_crafts.Controllers.Helpers;
+﻿
 using handi_crafts.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -89,7 +89,7 @@ namespace handi_crafts.Controllers
             _context.Add(Item);
             var product = _context.Products.Where(x => x.Id == id).SingleOrDefault();
         
-       await _context.SaveChangesAsync();
+           await _context.SaveChangesAsync();
             return RedirectToAction("Index", "User");
 
         }
@@ -231,68 +231,6 @@ namespace handi_crafts.Controllers
         {
 
 
-            //var pdfDocuments = new List<PdfDocument>();
-
-
-            //foreach (var item in ProductsList)
-            //{
-
-            //    pdfDocuments.Add(PdfDocument.FromFile("Item Name" + item.Product.Name + " item Price: " + item.Product.Price));
-            //}
-            //var mergedPdfDocument = PdfDocument.Merge(pdfDocuments);
-            //mergedPdfDocument.SaveAs("merged.pdf");
-
-
-            //PdfDocument pdf = new PdfDocument();
-            //PdfPage page = pdf.Pages.Add();
-            //PdfGraphics graphic1 = page.Graphics;
-            //PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-            //graphic1.DrawString("Hello World!!!", font, PdfBrushes.Black, new Syncfusion.Drawing.PointF(0, 0));
-
-            //MemoryStream stream = new MemoryStream();
-
-            //pdf.Save(stream);
-
-            ////Set the position as '0'.
-            //stream.Position = 0;
-
-            ////Download the PDF document in the browser
-            //FileStreamResult fileStreamResult = new FileStreamResult(stream, "application/pdf");
-
-            //fileStreamResult.FileDownloadName = "Sample.pdf";
-
-
-
-            //< table class="table">
-            //      <thead>
-            //        <tr>
-            //          <th class="">Item Name</th>
-            //          <th class="">Item Price</th>
-            //          <th class="">Actions</th>
-            //        </tr>
-            //      </thead>
-            //      <tbody>
-            //                   <tr class="">
-            //    
-            //          <td class="">$45</td>
-            //          <td class="">
-            //            <a class="product-remove" href="#!">Remove</a>
-            //          </td>
-            //        </tr>
-           
-     
-            //      </tbody>
-            //    </table>
-
-
-
-
-
-
-
-
-
-
             var userId = HttpContext.Session.GetInt32("UserId");
 
             string wwwRootPath = _webHostEnviroment.WebRootPath;
@@ -385,7 +323,7 @@ namespace handi_crafts.Controllers
             var userId = HttpContext.Session.GetInt32("UserId");
             ViewBag.userid = userId;
            
-            var userOrder = _context.CartProducts.Include(x => x.Cart).Include(x=>x.Product).Where(x => x.Cart.UserId == userId).ToList();
+            var userOrder = _context.Carts.Include(x => x.CartProducts).ThenInclude(x=>x.Product).Where(x => x.UserId == userId&& x.Purchasestate==1).ToList();
 
             return View(userOrder);
 

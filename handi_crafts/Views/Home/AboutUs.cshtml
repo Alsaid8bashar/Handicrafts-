@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewData["Title"] = "AboutUs";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@model IEnumerable<handi_crafts.Models.Page>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+
+
+<script>
+
+    $(document).ready(function() {
+
+        $('.counter').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+}); 
+ 
+});  
+
+</script>
+<style>
+
+        .counter-section i { display:block; margin:0 0 10px}
+.counter-section span.counter { font-size:40px; color:#000; line-height:60px; display:block; font-family: "Oswald",sans-serif; letter-spacing: 2px}
+.counter-title{ font-size:12px; letter-spacing:2px; text-transform: uppercase}
+.counter-icon {top:25px; position:relative}
+.counter-style2 .counter-title {letter-spacing: 0.55px; float: left;}
+.counter-style2 span.counter {letter-spacing: 0.55px; float: left; margin-right: 10px;}
+.counter-style2 i {float: right; line-height: 26px; margin: 0 10px 0 0}
+.counter-subheadline span {float: right;}  
+
+.medium-icon {
+    font-size: 40px !important;
+    margin-bottom: 15px !important;
+} 
+
+
+
+
+</style>
+
+
+
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">About Us</h1>
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li class="active">about us</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="about section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<img class="img-responsive" src="@Url.Content("~/Images/" + Model.ElementAt(0).Images.Where(x=>x.PageId==3).ElementAt(0).ImagePath)">
+			</div>
+			<div class="col-md-6">
+				<h2 class="mt-40">@Model.ElementAt(0).Contents.Where(x=>x.PageId==3).ElementAt(0).Content1</h2>
+				<p> @Model.ElementAt(0).Contents.Where(x=>x.PageId==3).ElementAt(1).Content1</p>
+				
+				<a asp-action="ContactUs" class="btn btn-main mt-20">Contact us</a>
+			</div>
+		</div>
+		
+	</div>
+</section>
+
+<section class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+            <div class="container">
+                <div class="row">
+                    <!-- counter -->
+                    <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="300ms" style="visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;">
+                        <i class="fa fa-beer medium-icon"></i>
+                        <span id="anim-number-pizza" class="counter-number"></span>
+                        <span class="timer counter alt-font appear" data-to="980" data-speed="7000">@ViewBag.NumberOfOrder</span>
+                        <p class="counter-title">ORDERS</p>
+                    </div>
+                    <!-- end counter -->
+                    <!-- counter -->
+                    <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="600ms" style="visibility: visible; animation-duration: 600ms; animation-name: fadeInUp;">
+                        <i class="fa fa-heart medium-icon"></i>
+                         <span class="timer counter alt-font appear" data-to="980" data-speed="7000">@ViewBag.NumberOfProduct</span>
+                        <span class="counter-title">PRODUCTS</span>
+                    </div>
+                    <!-- end counter -->
+                    <!-- counter -->
+                    <div class="col-md-3 col-sm-6 bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten animated" data-wow-duration="900ms" style="visibility: visible; animation-duration: 900ms; animation-name: fadeInUp;">
+                        <i class="fa fa-anchor medium-icon"></i>
+                         <span class="timer counter alt-font appear" data-to="810" data-speed="7000">@ViewBag.NumberOfUsers</span>
+                        <span class="counter-title">HAPPY CLIENTS</span>
+                    </div>
+                    <!-- end counter -->
+                    <!-- counter -->
+                    <div class="col-md-3 col-sm-6 text-center counter-section wow fadeInUp animated" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-name: fadeInUp;">
+                        <i class="fa fa-user medium-icon"></i>
+                         <span class="timer counter alt-font appear" data-to="600" data-speed="7000">50</span>
+                        <span class="counter-title">Clients Served</span>
+                    </div>
+                    <!-- end counter -->
+                </div>
+            </div>
+        </section>
+
+<div class="section video-testimonial bg-1 overly-white text-center mt-50">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Video presentation</h2>
+				<a class="play-icon" href="https://www.youtube.com/watch?v=oyEuk8j8imI&amp;rel=0" data-toggle="lightbox">
+					<i class="tf-ion-ios-play"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

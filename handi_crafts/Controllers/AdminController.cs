@@ -15,28 +15,39 @@ using MailKit.Security;
 
 namespace handi_crafts.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : AdminBaseController
     {
         private readonly ModelContext _context;
         private readonly IWebHostEnvironment _webHostEnviroment;
 
-        public AdminController(ModelContext context, IWebHostEnvironment webHostEnviroment)
+        public AdminController(ModelContext context, IWebHostEnvironment webHostEnviroment) : base(context)
         {
             _context = context;
             _webHostEnviroment = webHostEnviroment;
-
 
         }
 
         public IActionResult Index()
         {
-            ViewBag.NumberOfUsers = _context.Userrs.Count();
-            ViewBag.NumberOfCraftsmen = _context.UserrLogins.Where(x => x.RoleId == 2).Count();
-            ViewBag.NumberOfProduct = _context.Products.Count();
-            ViewBag.NumberOfsold = _context.CartProducts.Where(x=>x.Cart.Purchasestate==1).Count();
-            var id = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+                ViewBag.NumberOfUsers = _context.Userrs.Count();
+                ViewBag.NumberOfCraftsmen = _context.UserrLogins.Where(x => x.RoleId == 2).Count();
+                ViewBag.NumberOfProduct = _context.Products.Count();
+                ViewBag.NumberOfsold = _context.CartProducts.Where(x=>x.Cart.Purchasestate==1).Count();
+        
+            var SalesCharts= _context.CartProducts.Include(x=>x.Cart).Where(x=>x.Cart.Purchasestate == 1).ToList();
+        
+            List<int> salesMonths = new List<int>();
+            foreach(var item in SalesCharts)
+            {
+                salesMonths.Add(item.Cart.DatePurchase.Value.Month);
+            }
+
+            ViewBag.Months = salesMonths;
+            return View();
+        }
+        public IActionResult Index1()
+        {
+          
             return View();
         }
 
@@ -46,9 +57,7 @@ namespace handi_crafts.Controllers
         {
 
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+        
             if (id == null)
             {
                 return NotFound();
@@ -69,6 +78,7 @@ namespace handi_crafts.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+      
         public async Task<IActionResult> UpdateProfile(decimal id, [Bind("Id,FirstName,LastName,ImagePath,ImageFile")] Userr userr, String password, String userName, String email)
         {
 
@@ -132,9 +142,6 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> TestimonialRequest()
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
             var TestimonialAproval = _context.Testimonials.Include(x => x.User).ToList();
 
 
@@ -142,7 +149,7 @@ namespace handi_crafts.Controllers
         }
         public async Task<IActionResult> AcceptTestimonial(decimal id)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
+            
 
             var user = _context.Testimonials.Include(x => x.User).Where(x => x.Id == id).SingleOrDefault();
 
@@ -176,9 +183,7 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> VendorRequest()
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+         
             var vendorsOnAproval = _context.UserrLogins.Include(x => x.Userr).ToList();
 
             ViewBag.vendorsOnAproval = vendorsOnAproval;
@@ -203,7 +208,7 @@ namespace handi_crafts.Controllers
             BodyBuilder body = new BodyBuilder();
             body.HtmlBody = "<p> We have received your request to be vendor on our website  </p>" +
                 "<p>This is a notification that serves as confirmation that your request has been approved</p>" +
-                "<h2>Regards" +
+                "<h2>Regards ," +
                 "Bashar </h2>";
 
             message.Body = body.ToMessageBody();
@@ -255,13 +260,12 @@ namespace handi_crafts.Controllers
         }
         public async Task<IActionResult> SalesSearch()
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+        
 
             var modelContext = _context.CartProducts.Include(p => p.Cart).Include(p => p.Product);
             var Names = _context.Userrs.Include(p => p.Carts).ToList();
             ViewBag.Names = Names;
+            
             return View(await modelContext.ToListAsync());
 
         }
@@ -269,9 +273,6 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> SalesSearch(DateTime? startDate, DateTime? endDate)
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
             var Names = _context.Userrs.Include(p => p.Carts).ToList();
             ViewBag.Names = Names;
             var result = _context.CartProducts.Include(p => p.Cart).Include(p => p.Product);
@@ -308,9 +309,7 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> MonthlyReports()
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+           
 
             var modelContext = _context.CartProducts.Include(p => p.Cart).Include(p => p.Product);
             ViewBag.TotalQuantity = modelContext.Sum(x => x.Quantity);
@@ -325,9 +324,7 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> MonthlyReports(int? Month)
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
             var result = _context.CartProducts.Include(p => p.Cart).Include(p => p.Product);
 
             if (Month != null)
@@ -350,9 +347,7 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> AnnualReports()
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+           
 
             var modelContext = _context.CartProducts.Include(p => p.Cart).Include(p => p.Product);
             ViewBag.TotalQuantity = modelContext.Sum(x => x.Quantity);
@@ -366,9 +361,7 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> AnnualReports(int? Year)
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
             var result = _context.CartProducts.Include(p => p.Cart).Include(p => p.Product);
 
 
@@ -398,18 +391,14 @@ namespace handi_crafts.Controllers
         {
 
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
             return View(await _context.Categories.ToListAsync());
 
 
         }
         public async Task<IActionResult> AddCategory()
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+           
             ViewData["Id"] = new SelectList(_context.Categories, "Id", "CategoryName");
 
             return View();
@@ -422,9 +411,7 @@ namespace handi_crafts.Controllers
         public async Task<IActionResult> AddCategory([Bind("Id,CategoryName,ImagePath,ImageFile")] Category category)
         {
 
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+       
             if (ModelState.IsValid)
             {
                 if (category.ImageFile != null)
@@ -456,9 +443,7 @@ namespace handi_crafts.Controllers
 
         public async Task<IActionResult> EditCategory(decimal? id)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
             if (id == null)
             {
                 return NotFound();
@@ -534,9 +519,7 @@ namespace handi_crafts.Controllers
 
         public async Task<IActionResult> Delete(decimal? id)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+          
             if (id == null)
             {
                 return NotFound();
@@ -557,9 +540,7 @@ namespace handi_crafts.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CategoryDelete(decimal id)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+        
             var category = await _context.Categories.FindAsync(id);
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
@@ -568,9 +549,7 @@ namespace handi_crafts.Controllers
 
         public async Task<IActionResult> CategoryDelete(decimal? id)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
 
             if (id == null)
             {
@@ -588,9 +567,7 @@ namespace handi_crafts.Controllers
         }
         public async Task<IActionResult> ManageHome()
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
 
             var images = _context.Images.Where(x => x.PageId == 1).ToList();
             ViewBag.HomePageImages = images;
@@ -606,9 +583,7 @@ namespace handi_crafts.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageHome(decimal id, [Bind("Id,PageId,ImagePath,ImageFile")] Image image)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
 
             if (id != image.Id)
             {
@@ -729,9 +704,7 @@ namespace handi_crafts.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageAboutUs(decimal id,string contant)
         {
-            var id2 = HttpContext.Session.GetInt32("AdminId"); // 81
-            var user = _context.Userrs.Where(x => x.Id == id2).FirstOrDefault();
-            ViewBag.AdminInfo = user;
+            
             var Aboutus = _context.Pages.Include(x => x.Images).Include(x => x.Contents).Where(x => x.Id == 3);
           
             Content contant2=new Content();

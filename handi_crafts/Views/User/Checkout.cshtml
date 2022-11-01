@@ -101,7 +101,7 @@
 						<a asp-action="RemoveFromCart1" asp-route-id=@item.Id2>Remove</a>
 					</div>
 				</div>
-				Sum += (int)item.Product.Price;
+				Sum += (int)item.Product.Price*item.Quantity;
 			}
 
 			<div class="discount-code">

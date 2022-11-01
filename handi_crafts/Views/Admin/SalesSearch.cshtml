@@ -1,100 +1,98 @@
-﻿
-@{
-    ViewData["Title"] = "SalesSearch";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+﻿@{
+	ViewData["Title"] = "SalesSearch";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
- @{
- ViewBag.Admin= ViewBag.AdminInfo;
- }
- 		@{
-												     List<Userr> Userr = ViewBag.Names;
-											}
- 
- @model IEnumerable<handi_crafts.Models.CartProduct>
-    <div class="app-wrapper">
-	    
-	    <div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl">
-		
-			    <div class="row g-3 mb-4 align-items-center justify-content-between">
-				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Orders</h1>
-				    </div>
-					   <br />
-					      <br />
-						     <br />
-							 	 <form asp-action="SalesSearch" >
-								<div class="row mb-3">
-											  <label for="inputDate" class="col-sm-2 col-form-label">Start Date</label>
-											  <div class="col-sm-10">
-												<input name="startDate"  type="date" class="form-control">
-											  </div>
-											</div>
-											<div class="row mb-3">
-											  <label for="inputDate" class="col-sm-2 col-form-label"> End Date</label>
-											  <div class="col-sm-10">
-												<input name="endDate" type="date" class="form-control">
-											  </div>
-											</div>
-											 
-					                 
-					                    <div class="col-auto">
-					                        <button type="submit" class="btn app-btn-secondary">Search</button>
-					                    </div>
-					            
+@{
+	ViewBag.Admin = ViewBag.AdminInfo;
+}
+@{
+	List<Userr> Userr = ViewBag.Names;
+}
+
+@model IEnumerable<handi_crafts.Models.CartProduct>
+<div class="app-wrapper">
+
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+
+			<div class="row g-3 mb-4 align-items-center justify-content-between">
+				<div class="col-auto">
+					<h1 class="app-page-title mb-0">Orders</h1>
+				</div>
+				<br />
+				<br />
+				<br />
+				<form asp-action="SalesSearch">
+					<div class="row mb-3">
+						<label for="inputDate" class="col-sm-2 col-form-label">Start Date</label>
+						<div class="col-sm-10">
+							<input name="startDate" type="date" class="form-control">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="inputDate" class="col-sm-2 col-form-label"> End Date</label>
+						<div class="col-sm-10">
+							<input name="endDate" type="date" class="form-control">
+						</div>
+					</div>
 
 
-					 </form>
-					
-				    <div class="col-auto">
-					     <div class="page-utilities">
-						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-							    <div class="col-auto">
-								 
-					                
-							    </div><!--//col-->
+					<div class="col-auto">
+						<button type="submit" class="btn app-btn-secondary">Search</button>
+					</div>
 
-					
+
+
+				</form>
+
+				<div class="col-auto">
+					<div class="page-utilities">
+						<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							<div class="col-auto">
+							</div><!--//col-->
+
+
 						</div><!--//row-->
 					</div><!--//table-utilities-->
 				</div><!--//col-auto-->
 			</div><!--//row-->
-			   
-			    
-			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
-				</nav>
-				
-				
-				<div class="tab-content" id="orders-table-tab-content">
-			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-					    <div class="app-card app-card-orders-table shadow-sm mb-5">
-						    <div class="app-card-body">
-							    <div class="table-responsive">
-							        <table class="table app-table-hover mb-0 text-left">
-										<thead>
-											<tr>
-												
-												<th class="cell">Product</th>
-												<th class="cell">price</th>
-												<th class="cell">Date</th>
-												<th class="cell">User name</th>
-												<th class="cell">Status</th>
-										
 
-											</tr>
-										</thead>
-									
-										<tbody>
-											@foreach(var item in Model){
+
+			<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				<a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
+				<a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
+				<a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
+			</nav>
+
+
+			<div class="tab-content" id="orders-table-tab-content">
+				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					<div class="app-card app-card-orders-table shadow-sm mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+								<table class="table app-table-hover mb-0 text-left">
+									<thead>
+										<tr>
+
+											<th class="cell">Product</th>
+											<th class="cell">price</th>
+											<th class="cell">Date</th>
+											<th class="cell">User name</th>
+											<th class="cell">Status</th>
+
+
+										</tr>
+									</thead>
+
+									<tbody>
+										@foreach (var item in Model)
+										{
 											<tr>
-												
-													<td class="cell"> @Html.DisplayFor(modelItem => item.Product.Name)</td>
+
+												<td class="cell"> @Html.DisplayFor(modelItem => item.Product.Name)</td>
 												<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Product.Price)</span></td>
-												
+
 												<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Cart.DatePurchase)</span></td>
 
 												<td class="cell">
@@ -104,143 +102,158 @@
 												</td>
 
 
-												@if(item.Cart.Purchasestate==1){
+												@if (item.Cart.Purchasestate == 1)
+												{
 													<td class="cell"><span class="badge bg-success"> Paid</span></td>
 												}
 												else
 												{
-																									<td class="cell"><span class="badge bg-warning"> Pending</span></td>
+													<td class="cell"><span class="badge bg-warning"> Pending</span></td>
 
 												}
 
+											
 
 
-												
-											</tr>												}
-										
-										</tbody>
-									</table>
-						        </div><!--//table-responsive-->
-						       
-						    </div><!--//app-card-body-->		
-						</div><!--//app-card-->
-						<nav class="app-pagination">
-							<ul class="pagination justify-content-center">
-								<li class="page-item disabled">
-									<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-							    </li>
-								<li class="page-item active"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item">
-								    <a class="page-link" href="#">Next</a>
-								</li>
-							</ul>
-						</nav><!--//app-pagination-->
-						
-			        </div><!--//tab-pane-->
-			        
-			        <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
-					    <div class="app-card app-card-orders-table mb-5">
-						    <div class="app-card-body">
-							    <div class="table-responsive">
-								    
-							        <table class="table mb-0 text-left">
-										<thead>
-											<tr>
+
+											</tr>
+										}
+										<tr>
+									<td class="cell"><span class="truncate"></span></td>
+
+
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+					<nav class="app-pagination">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled">
+								<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+							</li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav><!--//app-pagination-->
+
+				</div><!--//tab-pane-->
+
+				<div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+					<div class="app-card app-card-orders-table mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+
+								<table class="table mb-0 text-left">
+									<thead>
+										<tr>
 											<th class="cell">Product</th>
-												<th class="cell">price</th>
-												<th class="cell">Date</th>
-												<th class="cell">User name</th>
-												<th class="cell">Status</th>
-											</tr>
-										</thead>
-										<tbody>
+											<th class="cell">price</th>
+											<th class="cell">Date</th>
+											<th class="cell">User name</th>
+											<th class="cell">Status</th>
+										</tr>
+									</thead>
+									<tbody>
 
-											@foreach(var item in Model){
-											@if(item.Cart.Purchasestate==1){
-												<tr>
-													
-													<td class="cell"> @Html.DisplayFor(modelItem => item.Product.Name)</td>
-												<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Product.Price)</span></td>
-												
-												<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Cart.DatePurchase)</span></td>
-												
-
-														<td class="cell">
-													<span class="truncate">
-														@Userr.Find(x=> x.Id==item.Cart.UserId).FirstName
-													</span>
-												</td>
-
-												<td class="cell"><span class="badge bg-success"> Paid</span></td>
-											
-
-
-
-												
-											</tr>					}							}
-		
-										</tbody>
-									</table>
-						        </div><!--//table-responsive-->
-						    </div><!--//app-card-body-->		
-						</div><!--//app-card-->
-			        </div><!--//tab-pane-->
-			        
-			        <div class="tab-pane fade" id="orders-pending" role="tabpanel" aria-labelledby="orders-pending-tab">
-					    <div class="app-card app-card-orders-table mb-5">
-						    <div class="app-card-body">
-							    <div class="table-responsive">
-							        <table class="table mb-0 text-left">
-										<thead>
-											<tr>
-									<th class="cell">Product</th>
-												<th class="cell">price</th>
-												<th class="cell">Date</th>
-												<th class="cell">User name</th>
-												<th class="cell">Status</th>
-											</tr>
-										</thead>
-										<tbody>
-												@foreach(var item in Model){
-											@if(item.Cart.Purchasestate==0){
+										@foreach (var item in Model)
+										{
+											@if (item.Cart.Purchasestate == 1)
+											{
 												<tr>
 
 													<td class="cell"> @Html.DisplayFor(modelItem => item.Product.Name)</td>
-												<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Product.Price)</span></td>
-												
-												<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Cart.DatePurchase)</span></td>
-												
+													<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Product.Price)</span></td>
 
-														<td class="cell">
-													<span class="truncate">
-														@Userr.Find(x=> x.Id==item.Cart.UserId).FirstName
-													</span>
-												</td>
-
-												<td class="cell"><span class="badge bg-warning"> Pending</span></td>
-											
+													<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Cart.DatePurchase)</span></td>
 
 
+													<td class="cell">
+														<span class="truncate">
+															@Userr.Find(x=> x.Id==item.Cart.UserId).FirstName
+														</span>
+													</td>
 
-												
-											</tr>					}							}
-										</tbody>
-									</table>
-						        </div><!--//table-responsive-->
-						    </div><!--//app-card-body-->		
-						</div><!--//app-card-->
-			        </div><!--//tab-pane-->
-			
-				
-			    
-		    </div><!--//container-fluid-->
-	    </div><!--//app-content-->
-	    
-	   
-	    
-    </div><!--//app-wrapper-->    					
+													<td class="cell"><span class="badge bg-success"> Paid</span></td>
+
+
+
+
+
+												</tr>
+											}							}
+
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+				</div><!--//tab-pane-->
+
+				<div class="tab-pane fade" id="orders-pending" role="tabpanel" aria-labelledby="orders-pending-tab">
+					<div class="app-card app-card-orders-table mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+								<table class="table mb-0 text-left">
+									<thead>
+										<tr>
+											<th class="cell">Product</th>
+											<th class="cell">price</th>
+											<th class="cell">Date</th>
+											<th class="cell">User name</th>
+											<th class="cell">Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model)
+										{
+											@if (item.Cart.Purchasestate == 0)
+											{
+												<tr>
+
+													<td class="cell"> @Html.DisplayFor(modelItem => item.Product.Name)</td>
+													<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Product.Price)</span></td>
+
+													<td class="cell"><span class="truncate"> @Html.DisplayFor(modelItem => item.Cart.DatePurchase)</span></td>
+
+
+													<td class="cell">
+														<span class="truncate">
+															@Userr.Find(x=> x.Id==item.Cart.UserId).FirstName
+														</span>
+													</td>
+
+													<td class="cell"><span class="badge bg-warning"> Pending</span></td>
+
+
+
+
+
+												</tr>
+											}							}
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+				</div><!--//tab-pane-->
+
+
+
+			</div><!--//container-fluid-->
+		</div><!--//app-content-->
+
+
+
+	</div><!--//app-wrapper-->
 
 
 

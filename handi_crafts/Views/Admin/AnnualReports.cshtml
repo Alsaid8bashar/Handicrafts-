@@ -88,10 +88,14 @@
 
 
 										</tr>
+										
+									
 									</thead>
 									<tbody>
 
-
+										@{
+											double sum = 0;
+										}
 										@foreach (var item in Model)
 										{
 
@@ -111,11 +115,32 @@
 												<td>
 													@Html.DisplayFor(modelItem => item.Product.Price)
 												</td>
+													@{
+													sum +=(double) item.Product.Price;
+												}
+
 											</tr>
 										}
 
+								
+
 
 									</tbody>
+									<tfoot>
+										<tr>
+											<td>
+												total :@(sum)
+											</td>
+
+											<td>
+												Profits :@(sum-sum*.70)
+											</td>
+											<td>
+												Losses :@(sum*.70)
+											</td>
+										</tr>
+									</tfoot>
+								
 								</table>
 							</div><!--//table-responsive-->
 

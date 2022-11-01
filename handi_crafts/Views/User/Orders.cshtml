@@ -1,4 +1,4 @@
-﻿@model IEnumerable<handi_crafts.Models.CartProduct>
+﻿@model IEnumerable<handi_crafts.Models.Cart>
 
 @{
     ViewData["Title"] = "Orders";
@@ -50,11 +50,11 @@
 							
 								@foreach(var item in Model){
 								<tr>
-									<td>#@item.Cart.Idd</td>
-									<td>@item.Cart.DatePurchase</td>
-									<td>@item.Cart.CartProducts.Count()</td>
-									<td>$@item.Cart.CartProducts.Sum(x=> x.Product.Price) </td>
-										@if (@item.Cart.Purchasestate == 1)
+									<td>#@item.Idd</td>
+									<td>@item.DatePurchase</td>
+									<td>@item.CartProducts.Count()</td>
+									<td>$@item.CartProducts.Sum(x=> x.Product.Price) </td>
+										@if (@item.Purchasestate == 1)
 										{
 											<td><span class="label label-success">Completed</span></td>
 										}

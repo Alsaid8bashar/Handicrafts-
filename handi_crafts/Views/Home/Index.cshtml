@@ -4,7 +4,381 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
+@model IEnumerable<handi_crafts.Models.Product>
+@{
+	ViewBag.cart = ViewBag.usercart;
+}
+<style>
 
+#quote-carousel {
+    padding: 0 10px 30px 10px;
+    margin-top: 60px;
+}
+#quote-carousel .carousel-control {
+    background: none;
+    color: #CACACA;
+    font-size: 2.3em;
+    text-shadow: none;
+    margin-top: 30px;
+}
+#quote-carousel .carousel-indicators {
+    position: relative;
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-top: 20px;
+    margin-right: -19px;
+}
+#quote-carousel .carousel-indicators li {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    opacity: 0.4;
+    overflow: hidden;
+    transition: all .4s ease-in;
+    vertical-align: middle;
+}
+#quote-carousel .carousel-indicators .active {
+    width: 128px;
+    height: 128px;
+    opacity: 1;
+    transition: all .2s;
+}
+.item blockquote {
+    border-left: none;
+    margin: 0;
+}
+.item blockquote p:before {
+    content: "\f10d";
+    font-family: 'Fontawesome';
+    float: left;
+    margin-right: 10px;
+}
+
+</style>
+
+@{
+	List<Image> images = ViewBag.HomePageImages;
+}
+
+
+<div class="hero-slider">
+	<div class="slider-item th-fullpage hero-area" style="background-image: url(@Url.Content("~/Images/" + images.ElementAt(0).ImagePath));">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 text-center">
+					<p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
+					<h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
+					<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" asp-action="Shop">Shop Now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="slider-item th-fullpage hero-area" style="background-image: url(@Url.Content("~/Images/" + images.ElementAt(1).ImagePath));">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 text-left">
+					<p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
+					<h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
+					<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"  asp-action="Shop">Shop Now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="slider-item th-fullpage hero-area" style="background-image: url(@Url.Content("~/Images/" + images.ElementAt(2).ImagePath));">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 text-right">
+					<p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
+					<h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
+					<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" asp-action="Shop">Shop Now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="product-category section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="title text-center">
+					<h2>Product Category</h2>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="category-box">
+					<a asp-action="Shop" asp-route-id="@Model.ElementAt(2).CategoryId">
+						<img src="@Url.Content("~/Images/" +Model.ElementAt(2).Category.ImagePath)" alt="" />
+						<div class="content">
+							<h3 style="color:aliceblue">@Model.ElementAt(2).Category.CategoryName</h3>
+							<p style="color:aliceblue">Shop New Season Clothing</p>
+						</div>
+					</a>
+				</div>
+				<div class="category-box">
+					<a asp-action="Shop" asp-route-id="@Model.ElementAt(1).CategoryId">
+						<img src="@Url.Content("~/Images/" +Model.ElementAt(1).Category.ImagePath)" alt="" />
+						<div class="content">
+							<h3 style="color:aliceblue">@Model.ElementAt(1).Category.CategoryName</h3>
+							<p style="color:aliceblue">Get Wide Range Selection </p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="category-box">
+					<a  asp-action="Shop" asp-route-id="@Model.ElementAt(0).CategoryId">
+						<img src="@Url.Content("~/Images/" +Model.ElementAt(0).Category.ImagePath)" alt="" />
+						<div class="content">
+							<h3 style="color:aliceblue">@Model.ElementAt(0).Category.CategoryName</h3>
+							<p style="color:aliceblue" >Get Wide Range Selection</p>
+						</div>
+					</a>
+				</div>
+				 <div class="category-box">
+					<a asp-action="Shop" asp-route-id="@Model.ElementAt(5).CategoryId">
+						<img src="@Url.Content("~/Images/" +Model.ElementAt(5).Category.ImagePath)" alt="" />
+						<div class="content">
+							<h3 style="color:aliceblue">@Model.ElementAt(5).Category.CategoryName</h3>
+							<p style="color:aliceblue" >Get Wide Range Selection</p>
+						</div>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<section class="products section bg-gray">
+	<div class="container">
+		<div class="row">
+			<div class="title text-center">
+				<h2>Trendy Products</h2>
+			</div>
+		</div>
+		<div class="row">
+			@{
+				int x = 0;
+			}
+			@foreach (var item in Model)
+			{
+
+				<div class="col-md-4">
+					<div class="product-item">
+						<div class="product-thumb">
+							<span class="bage">Sale</span>
+							<img class="img-responsive" src="@Url.Content("~/Images/" + item.Imagepath)" alt="product-img" />
+							<div class="preview-meta">
+								<ul>
+									<li>
+										<span data-toggle="modal" data-target="#product-@x">
+											<i class="tf-ion-ios-search-strong"></i>
+										</span>
+									</li>
+									<li>
+										<a href="~/home/#!"><i class="tf-ion-ios-heart"></i></a>
+									</li>
+									<li>
+										<a asp-action="AddToCart" asp-route-id="@item.Id"><i class="tf-ion-android-cart"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="product-content">
+							<h4><a href="~/home/product-single.html">@item.Name</a></h4>
+							<p class="price">$@item.Price</p>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<!-- Modal -->
+				<div class="modal product-modal fade" id="product-@x">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i class="tf-ion-close"></i>
+					</button>
+					<div class="modal-dialog " role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-md-8 col-sm-6 col-xs-12">
+										<div class="modal-image">
+											<img class="img-responsive" src="@Url.Content("~/Images/" + item.Imagepath)" alt="product-img" />
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="product-short-details">
+											<h2 class="product-title">@item.Name</h2>
+											<p class="product-price">$@item.Price</p>
+											<p class="product-short-description">
+												@item.Descriptionn
+											</p>
+											<form>
+												<div class="product-quantity">
+													<span>Quantity:</span>
+													<div class="product-quantity-slider">
+														<input id="product-quantity" type="number" name="Quantity" max=@item.Quantity min=0 placeholder="0">
+													</div>
+												</div>
+												<button type="sumbit" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-main mt-20">Add To Cart</button>
+
+											</form>
+									
+
+											<a asp-action="SingleProduct" asp-route-id="@item.Id" class="btn btn-transparent">View Product Details</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{
+					x++;
+				}
+
+				<!-- /.modal -->
+			}
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</section>
+
+<!--
+Start Call To Action
+==================================== -->
+
+
+
+
+
+
+
+
+
+
+
+@{
+	List<Testimonial> testimonial = ViewBag.Testimonials;
+}
+
+        	<div class="title text-center">
+
+				<h6>TESTIMONIALS</h6>
+				<h1>What Clients Say</h1>
+
+			</div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner text-center">
+                        <!-- Quote 1 -->
+                        <div class="item active">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p>@testimonial.ElementAt(0).Content</p>
+                                        <small>@testimonial.ElementAt(0).User.FirstName</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+						@for (int i=1;i <testimonial.Count(); i++){
+                        <!-- Quote 2 -->
+                        <div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p> @testimonial.ElementAt(i).Content</p>
+                                        <small>@testimonial.ElementAt(i).User.FirstName</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+						}
+                        <!-- Quote 3 -->
+                     
+                    </div>
+                    <!-- Bottom Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="@Url.Content("~/Images/" + testimonial.ElementAt(0).User.ImagePath)" alt="">
+                        </li>
+						@for (int i=1;i <testimonial.Count(); i++){
+                        <li data-target="#quote-carousel" data-slide-to="@i"><img class="img-responsive"  src="@Url.Content("~/Images/" + testimonial.ElementAt(i).User.ImagePath)" alt="product-img" alt="">
+                        </li>
+						}
+                    </ol>
+
+                    <!-- Carousel Buttons Next/Prev -->
+                    <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                    <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+<section class="call-to-action bg-gray section">
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="title">
+					<h2>SUBSCRIBE TO NEWSLETTER</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut sequi. Minus facilis vitae excepturi sit laboriosam.</p>
+				</div>
+				<div class="col-lg-6 col-md-offset-3">
+					<div class="input-group subscription-form">
+						<input type="text" class="form-control" placeholder="Enter Your Email Address">
+						<span class="input-group-btn">
+							<button class="btn btn-main" type="button">Subscribe Now!</button>
+						</span>
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
+
+			</div>
+		</div> 		<!-- End row -->
+	</div>   	<!-- End container -->
+</section>   <!-- End section -->
+
+<section class="section instagram-feed">
+	<div class="container">
+		<div class="row">
+			<div class="title">
+				<h2>View us on instagram</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="instagram-slider" id="instafeed" data-accessToken="IGQVJYeUk4YWNIY1h4OWZANeS1wRHZARdjJ5QmdueXN2RFR6NF9iYUtfcGp1NmpxZA3RTbnU1MXpDNVBHTzZAMOFlxcGlkVHBKdjhqSnUybERhNWdQSE5hVmtXT013MEhOQVJJRGJBRURn"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript" src="~/JavaScript.js"></script>
+
+@*
 <div class="hero-slider">
   <div class="slider-item th-fullpage hero-area" style="background-image: url(home/images/slider/Slide1.jpg);">
     <div class="container">
@@ -405,3 +779,4 @@ Start Call To Action
 		</div>
 	</div>
 </section>
+*@
